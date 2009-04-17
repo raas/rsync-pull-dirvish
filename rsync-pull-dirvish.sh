@@ -83,9 +83,9 @@ function get_older_ref() {
 	find ${1:h} -maxdepth 1 -type d ! -name dirvish ! -path ${1:h} | while read __newfp; do
 		__newr=${__newfp:t}
 		if [[ "$__oldr" > "$__newr" ]] ; then
-			__rval=$__newr
-		else
-			break
+			if [[ "$__rval" == "__none__" ]] || [[ "$__rval" < "$__newr" ]]; then
+				__rval=$__newr
+			fi
 		fi
 	done
 	echo $__rval
