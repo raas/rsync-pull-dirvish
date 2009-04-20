@@ -251,7 +251,10 @@ for v in $VAULTS; do
 
 	echo "**** Copy to $v started ****"
 	tc0=$( date +%s)
-	for cc in ${COPY}; do
+
+	# sort results - copy older directories first
+	# (so as to have the reference ready if the other side still has it)
+	for cc in ${(n)COPY}; do
 		c=$( basename $cc )
 		rsync_copy $v $c
 		# only remote todo entry if rsync was successful
