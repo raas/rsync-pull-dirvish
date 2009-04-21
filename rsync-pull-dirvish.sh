@@ -210,8 +210,10 @@ for v in $VAULTS; do
 			DELETE="$DELETE ${l}"
 		fi
 	done # local
-	echo "New Copy $v: $COPY"
-	echo "New Delete $v: $DELETE"
+
+	# sort for readability
+	echo "New Copy $v: ${(n)COPY}"
+	echo "New Delete $v: ${(n)DELETE}"
 
 	# create 'todo' entries here
 	mkdir -p "${TO}/.todo.$v"
