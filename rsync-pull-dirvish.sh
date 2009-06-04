@@ -286,7 +286,7 @@ fi
 
 # clean up empties
 echo -n "Cleaning up empty directories... "
-find "$TO" -maxdepth 3 -type d -empty -print0 | xargs rm -rf
+find "$TO" -maxdepth 3 -type d -empty -print0 | xargs -0 rm -rf
 echo "done."
 
 dotlockfile -u "$LOCKFILE"
