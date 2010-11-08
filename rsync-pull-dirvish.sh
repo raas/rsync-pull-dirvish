@@ -240,8 +240,8 @@ for v in $VAULTS; do
 	echo "**** Delete in $v started ****"
 	for dd in $DELETE; do
 		d=$( basename $dd )
-		rm -rf "${TO}/${v}/${d}"
-		rm -f "${TO}/.todo.${v}/${d}"
+		ionice -c 3 rm -rf "${TO}/${v}/${d}"
+		ionice -c 3 rm -f "${TO}/.todo.${v}/${d}"
 	done
 	echo "**** Delete in $v finished in $(( $(date +%s) - $tc0 )) seconds ****"
 done
@@ -286,7 +286,7 @@ fi
 
 # clean up empties
 echo -n "Cleaning up empty directories... "
-find "$TO" -maxdepth 3 -type d -empty -print0 | xargs -0 rm -rf
+find "$TO" -maxdepth 3 -type d -empty -print0 | xargs -0 ionice -c 3 rm -rf
 echo "done."
 
 dotlockfile -u "$LOCKFILE"
