@@ -30,7 +30,7 @@ RSYNC_RETRIES=6
 RSYNC_SLEEP=30m # thus 6x30m = 3 hours in total
 
 # to here..
-TO=/srv/yggdrasil
+TO=/srv/iscsi
 
 set -o shwordsplit
 
@@ -240,6 +240,7 @@ for v in $VAULTS; do
 	echo "**** Delete in $v started ****"
 	for dd in $DELETE; do
 		d=$( basename $dd )
+		echo "***** deleting ${v}/${d}"
 		ionice -c 3 rm -rf "${TO}/${v}/${d}"
 		ionice -c 3 rm -f "${TO}/.todo.${v}/${d}"
 	done
