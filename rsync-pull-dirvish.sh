@@ -102,6 +102,10 @@ function rsync_copy() {
 		v=$1
 		i=$2
 		mkdir -p ${TO}/${v}/${i}
+		if [ $? -ne 0 ]; then
+			echo "Can't make directories, aborting"
+			exit 1
+		fi
 		t0rsync=$( date +%s)
 		# we copy the 'summary' file in its rightful place right now
 		# as we need it now to determine the reference image for this one
@@ -217,6 +221,10 @@ for v in $VAULTS; do
 
 	# create 'todo' entries here
 	mkdir -p "${TO}/.todo.$v"
+	if [ $? -ne 0 ]; then
+		echo "Can't make directories, aborting"
+		exit 1
+	fi
 	# should there be any unfinished 'copy' requests for images
 	# that now are deleted, this will overwrite the request
 	# with 'delete'..
